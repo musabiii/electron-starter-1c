@@ -100,10 +100,21 @@ reeadBaseList();
 function reeadBaseList() {
   // fs.readFile()
 // ibases.v8i
-// C:\Users\Front\AppData\Roaming\1C\1CEStart\ibases.v8i
-const pathList = process.env.HOME+ "\\AppData\\Roaming\\1C\\1CEStart\\ibases.v8i";
-console.log(pathList)
-fs.readFile(pathList,()=>{
-
-})
+  // C:\Users\Front\AppData\Roaming\1C\1CEStart\ibases.v8i
+  const pathList = process.env.HOME+ "\\AppData\\Roaming\\1C\\1CEStart\\ibases.v8i";
+  console.log(pathList)
+  const baseArr = fs.readFileSync(pathList,"utf-8").toString().split("\n");
+  // console.log(baseArr);
+  const baseObjArr = [];
+  for (let line of baseArr) {
+    // console.log(line)
+    if (line[0]==="[") {
+      const name = line.substring(1,line.length-1);
+      const baseObj = {name:name};
+      baseObjArr.push(baseObj);
+    }
+    if (line.includes("Connect=File=")) {
+     console.log(line.substring(13))
+    }
+  }
 }
